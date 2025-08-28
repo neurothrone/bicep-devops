@@ -1,0 +1,6 @@
+@ApiBaseUrl = http://localhost:5001
+
+
+## Get Weather Forecast
+GET {{ApiBaseUrl}}/weatherforecast/
+Accept: application/json
