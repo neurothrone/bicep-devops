@@ -27,6 +27,7 @@ jobs:
           scope: 'resourcegroup'
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: ${{ env.AZURE_RESOURCE_GROUP_NAME }}
+          region: ${{ env.AZURE_REGION }}
           template: ${{ env.BICEP_TEMPLATE_FILE }}
           parameters: ${{ env.BICEP_PARAMETERS_FILE }}
           deploymentName: ${{ github.run_number }}
