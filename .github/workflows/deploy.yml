@@ -23,8 +23,5 @@ jobs:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
           resourceGroupName: ${{ secrets.AZURE_RESOURCE_GROUP }}
           template: ./infra/deploy/main.bicep
-          parameters: |
-            @./infra/deploy/main.parameters.json
-            location=${{ secrets.AZURE_LOCATION }}
-            resourceGroupName=${{ secrets.AZURE_RESOURCE_GROUP }}
+          parameters: ./infra/deploy/main.parameters.json
           failOnStdErr: false
