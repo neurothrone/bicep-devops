@@ -35,7 +35,6 @@ jobs:
         with:
           failOnStdErr: false
           scope: subscription
-          #subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           deploymentName: ${{ github.run_number }}
           region: ${{ env.AZURE_REGION }}
           template: ${{ env.BICEP_TEMPLATE_FILE }}
