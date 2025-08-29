@@ -1,0 +1,27 @@
+name: Deploy Bicep File
+
+on: [ workflow_dispatch ]
+
+jobs:
+  deploy-to-azure:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout Infrastructure Code
+        uses: actions/checkout@main
+
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy Bicep File
+        uses: azure/arm-deploy@v1
+        with:
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+          resourceGroupName: ${{ secrets.AZURE_RESOURCE_GROUP }}
+          template: ./infra/main.bicep
+          parameters: ./infra/main.parameters.json
+          #parameters: storageAccountName=${{ secrets.STORAGE_ACCOUNT_NAME }}
+          failOnStdErr: false
+          scope: 'subscription'
