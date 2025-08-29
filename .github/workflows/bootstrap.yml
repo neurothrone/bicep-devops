@@ -19,6 +19,4 @@ jobs:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: ${{ secrets.AZURE_RESOURCE_GROUP }}
           template: ./infra/bootstrap/main.bicep
-          parameters: |
-            location=${{ secrets.AZURE_LOCATION }}
-            resourceGroupName=${{ secrets.AZURE_RESOURCE_GROUP }}
+          parameters: location=${{ secrets.AZURE_LOCATION }} resourceGroupName=${{ secrets.AZURE_RESOURCE_GROUP }}
