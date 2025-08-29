@@ -1,4 +1,4 @@
-name: "Build/Validate/Deploy Azure IaC with Bicep v1"
+name: "Lint/Validate/Deploy Azure IaC with Bicep v1"
 
 on: [ workflow_dispatch ]
 
