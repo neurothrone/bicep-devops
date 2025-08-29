@@ -4,14 +4,14 @@ param location string
 @description('Name of the Storage Account (3-24 lowercase letters/numbers)')
 @minLength(3)
 @maxLength(24)
-param name string
+param storageAccountName string
 
 @description('Tags to apply to the resource')
 param tags object
 
 resource storage 'Microsoft.Storage/storageAccounts@2023-05-01' = {
   location: location
-  name: name
+  name: storageAccountName
   sku: {
     name: 'Standard_LRS'
   }
