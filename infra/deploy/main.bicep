@@ -1,20 +1,27 @@
-// targetScope = 'subscription'
+targetScope = 'subscription'
 
 // !: --- Parameters ---
-// @description('Resource Group name')
-// param resourceGroupName string
+@description('Resource Group name')
+param resourceGroupName string
 
-// @description('Location for all resources')
-param location string = resourceGroup().location
+@description('Location for all resources')
+param location string
 
 // !: --- Modules ---
+resource rg 'Microsoft.Resources/resourceGroups@2024-07-01' = {
+  name: resourceGroupName
+  location: location
+  tags: {
+    deployedBy: 'Bicep'
+  }
+}
+
 module storageModule 'modules/storage.bicep' = {
   name: 'storageModule'
-  //   scope: resourceGroup(resourceGroupName)
+  scope: resourceGroup(rg.name)
   params: {
     location: location
-    name: 'stg${uniqueString(resourceGroup().id)}'
-    //     name: 'stg${uniqueString(resourceGroupName)}'
+    name: 'stg${uniqueString(rg.id)}'
   }
 }
 
