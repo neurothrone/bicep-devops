@@ -35,4 +35,4 @@ jobs:
           az deployment sub create \
             --location ${{ env.AZURE_REGION }} \
             --template-file ${{ env.BICEP_TEMPLATE_FILE }} \
-            --parameters ${{ env.BICEP_PARAMETERS_FILE }} \
+            --parameters ${{ env.BICEP_PARAMETERS_FILE }}
