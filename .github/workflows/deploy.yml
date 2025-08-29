@@ -1,4 +1,4 @@
-name: Deploy Azure Infrastructure with Bicep
+name: Deploy Azure IaC with Bicep
 
 on: [ workflow_dispatch ]
 
@@ -31,7 +31,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Deploy Bicep Template to Azure
-        uses: azure/arm-deploy@v1
+        uses: azure/arm-deploy@v2
         with:
           failOnStdErr: false
           scope: subscription

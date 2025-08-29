@@ -1,4 +1,4 @@
-name: Deploy Azure Infrastructure with Bicep v2
+name: Deploy Azure IaC with Bicep v2
 
 on: [ workflow_dispatch ]
 
