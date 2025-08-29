@@ -10,6 +10,17 @@
     },
     "solutionName": {
       "value": "bicep-devops"
+    },
+    "useUniqueResourceGroupName": {
+      "value": false
+    },
+    "resourceTags": {
+      "value": {
+        "Environment": "dev",
+        "Owner": "neurothrone",
+        "CostCenter": "IT",
+        "Project": "bicep-devops"
+      }
     }
   }
 }

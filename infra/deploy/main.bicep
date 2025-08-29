@@ -15,17 +15,19 @@ param location string
 @description('Solution name to be used in resource naming (alphanumeric, lowercase)')
 param solutionName string
 
-@description('Tags to apply to all resources')
-param resourceTags object = {
-  environment: environment
-  project: 'bicep-devops'
-}
+@description('Use a unique resource group name by appending a timestamp')
+param useUniqueResourceGroupName bool
 
 @description('Timestamp to ensure unique resource names (format: yyyyMMddHHmmss)')
 param deploymentTimestamp string = utcNow('yyyyMMddHHmmss')
 
+@description('Tags to apply to all resources')
+param resourceTags object
+
 // !: --- Variables ---
-var resourceGroupBaseName = 'rg-${solutionName}-${uniqueString(subscription().id)}'
+var resourceGroupBaseName = useUniqueResourceGroupName
+  ? 'rg-${solutionName}-${uniqueString(subscription().id)}'
+  : 'rg-${solutionName}'
 var resourceGroupFullName = '${resourceGroupBaseName}-${environment}'
 var resourceGroupModuleName = '${resourceGroupBaseName}-${deploymentTimestamp}-${environment}'
 
