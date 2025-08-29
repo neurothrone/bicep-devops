@@ -1,19 +1,20 @@
-targetScope = 'subscription'
+// targetScope = 'subscription'
 
 // !: --- Parameters ---
-@description('Resource Group name')
-param resourceGroupName string
+// @description('Resource Group name')
+// param resourceGroupName string
 
-@description('Location for all resources')
-param location string
+// @description('Location for all resources')
+param location string = resourceGroup().location
 
 // !: --- Modules ---
 module storageModule 'modules/storage.bicep' = {
   name: 'storageModule'
-  scope: resourceGroup(resourceGroupName)
+  //   scope: resourceGroup(resourceGroupName)
   params: {
     location: location
-    name: 'stg${uniqueString(resourceGroupName)}'
+    name: 'stg${uniqueString(resourceGroup().id)}'
+    //     name: 'stg${uniqueString(resourceGroupName)}'
   }
 }
 
