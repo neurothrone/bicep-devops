@@ -24,7 +24,6 @@ jobs:
           resourceGroupName: ${{ secrets.AZURE_RESOURCE_GROUP }}
           template: ./infra/deploy/main.bicep
           parameters: |
-            ./infra/deploy/main.parameters.json
             location=${{ secrets.AZURE_LOCATION }}
             resourceGroupName=${{ secrets.AZURE_RESOURCE_GROUP }}
           failOnStdErr: false
