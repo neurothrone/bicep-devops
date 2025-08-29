@@ -33,8 +33,8 @@ jobs:
       - name: Validate Bicep Template
         run: |
           az deployment sub validate \
-            --location ${{ env.AZURE_REGION }}
-            --template-file ${{ env.BICEP_TEMPLATE_FILE }}
+            --location ${{ env.AZURE_REGION }} \
+            --template-file ${{ env.BICEP_TEMPLATE_FILE }} \
             --parameters ${{ env.BICEP_PARAMETERS_FILE }}
 
   deploy:
