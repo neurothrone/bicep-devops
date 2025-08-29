@@ -2,13 +2,18 @@ name: Deploy Azure Infrastructure with Bicep
 
 on: [ workflow_dispatch ]
 
+env:
+  AZURE_REGION: ${{ vars.AZURE_REGION }}
+  AZURE_RESOURCE_GROUP_NAME: ${{ vars.AZURE_RESOURCE_GROUP_NAME }}
+  BICEP_TEMPLATE_FILE: ./infra/deploy/main.bicep
+
 jobs:
   deploy-to-azure:
     runs-on: ubuntu-latest
     steps:
 
       - name: Checkout Infrastructure Code
-        uses: actions/checkout@main
+        uses: actions/checkout@v3
 
       - name: Log in to Azure
         uses: azure/login@v1
@@ -16,12 +21,12 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Deploy Bicep Template to Azure
-        uses: azure/arm-deploy@v1
+        uses: azure/arm-deploy@v2
         with:
           scope: subscription
-          region: ${{ secrets.AZURE_LOCATION }}
+          region: ${{ env.AZURE_REGION }}
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          resourceGroupName: ${{ secrets.AZURE_RESOURCE_GROUP }}
+          resourceGroupName: ${{ env.AZURE_RESOURCE_GROUP_NAME }}
           template: ./infra/deploy/main.bicep
           parameters: ./infra/deploy/main.parameters.json
           failOnStdErr: false
