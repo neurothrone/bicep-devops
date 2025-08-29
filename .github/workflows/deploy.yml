@@ -1,12 +1,12 @@
-name: Deploy Azure IaC with Bicep
+name: "Deploy Azure IaC with Bicep"
 
 on: [ workflow_dispatch ]
 
 env:
   AZURE_REGION: ${{ vars.AZURE_REGION }}
   AZURE_RESOURCE_GROUP_NAME: ${{ vars.AZURE_RESOURCE_GROUP_NAME }}
-  BICEP_TEMPLATE_FILE: ./infra/deploy/main.bicep
-  BICEP_PARAMETERS_FILE: ./infra/deploy/main.parameters.json
+  BICEP_TEMPLATE_FILE: "./infra/deploy/main.bicep"
+  BICEP_PARAMETERS_FILE: "./infra/deploy/main.parameters.json"
 
 jobs:
   build:
@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup Bicep
-        run: az bicep build --file infra/deploy/main.bicep
+        run: "az bicep build --file infra/deploy/main.bicep"
 
   deploy:
     runs-on: ubuntu-latest

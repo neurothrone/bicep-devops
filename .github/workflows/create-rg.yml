@@ -1,15 +1,14 @@
-name: Create Resource Group on Azure
+name: "Create Resource Group on Azure"
 
 on: [ workflow_dispatch ]
 
 env:
-  BICEP_TEMPLATE_FILE: ./infra/deploy/main.bicep
+  BICEP_TEMPLATE_FILE: "./infra/deploy/main.bicep"
 
 jobs:
   create-resource-group:
     runs-on: ubuntu-latest
     steps:
-
       - name: Log in to Azure
         uses: azure/login@v2
         with:
