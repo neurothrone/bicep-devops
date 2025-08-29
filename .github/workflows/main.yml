@@ -1,4 +1,4 @@
-name: Deploy Bicep File
+name: Deploy Azure Infrastructure with Bicep
 
 on: [ workflow_dispatch ]
 
@@ -15,13 +15,15 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Deploy Bicep File
+      - name: Deploy Bicep Template to Azure
         uses: azure/arm-deploy@v1
         with:
+          scope: 'subscription'
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
           resourceGroupName: ${{ secrets.AZURE_RESOURCE_GROUP }}
-          template: ./infra/main.bicep
-          parameters: ./infra/main.parameters.json
-          #parameters: storageAccountName=${{ secrets.STORAGE_ACCOUNT_NAME }}
+          template: ./infra/deploy/main.bicep
+          parameters: |
+            ./infra/deploy/main.parameters.json
+            location=${{ secrets.AZURE_LOCATION }}
+            resourceGroupName=${{ secrets.AZURE_RESOURCE_GROUP }}
           failOnStdErr: false
-          scope: 'subscription'
