@@ -2,6 +2,9 @@ name: Create Resource Group on Azure
 
 on: [ workflow_dispatch ]
 
+env:
+  BICEP_TEMPLATE_FILE: ./infra/deploy/main.bicep
+
 jobs:
   create-resource-group:
     runs-on: ubuntu-latest
@@ -20,5 +23,5 @@ jobs:
           scope: subscription
           region: ${{ vars.AZURE_REGION }}
           resourceGroupName: ${{ vars.AZURE_RESOURCE_GROUP_NAME }}
-          template: ${{ BICEP_TEMPLATE_FILE }}
+          template: ${{ env.BICEP_TEMPLATE_FILE }}
           parameters: location=${{ vars.AZURE_REGION }} resourceGroupName=${{ vars.AZURE_RESOURCE_GROUP_NAME }}
