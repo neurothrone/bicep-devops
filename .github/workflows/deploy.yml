@@ -11,7 +11,14 @@ env:
 jobs:
   deploy-to-azure:
     runs-on: ubuntu-latest
+    container: mcr.microsoft.com/azure-cli:2.76.0
     steps:
+      - name: Install Node.js and Git for Actions
+        run: |
+          apt-get update
+          apt-get install -y curl git
+          curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+          apt-get install -y nodejs
 
       - name: Checkout Infrastructure Code
         uses: actions/checkout@v3
