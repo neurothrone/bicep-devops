@@ -24,7 +24,6 @@ jobs:
       - name: Ensure resource group exists
         run: az group create --name "${{ env.AZURE_RESOURCE_GROUP_NAME }}" --location "${{ env.AZURE_REGION }}"
 
-
       - name: Deploy Bicep Template to Azure
         uses: azure/arm-deploy@v2
         with:
