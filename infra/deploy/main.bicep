@@ -1,28 +1,38 @@
 targetScope = 'subscription'
 
 // !: --- Parameters ---
-@description('Resource Group name')
-param resourceGroupName string
-
 @description('Location for all resources')
 param location string
 
+@description('Resource Group name')
+param resourceGroupName string
+
+@description('Tags to apply to all resources')
+param resourceTags object = {
+  environment: 'dev'
+  project: 'bicep-devops'
+}
+
 // !: --- Modules ---
-resource rg 'Microsoft.Resources/resourceGroups@2024-07-01' = {
-  name: resourceGroupName
-  location: location
-  tags: {
-    deployedBy: 'Bicep'
+@description('Module to create the Resource Group')
+module resourceGroupModule 'modules/resource-group.bicep' = {
+  name: 'resourceGroupModule'
+  params: {
+    location: location
+    resourceGroupName: resourceGroupName
+    tags: resourceTags
   }
 }
 
 module storageModule 'modules/storage.bicep' = {
   name: 'storageModule'
-  scope: resourceGroup(rg.name)
+  scope: resourceGroup(resourceGroupModule.name)
   params: {
     location: location
-    name: 'stg${uniqueString(rg.id)}'
+    name: 'stg${uniqueString(subscription().id, resourceGroupName)}dev'
+    tags: resourceTags
   }
+  dependsOn: [resourceGroupModule]
 }
 
 // !: --- Outputs ---
