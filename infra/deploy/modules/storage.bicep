@@ -1,14 +1,17 @@
-@description('Azure region for the Storage Account.')
+@description('Azure region for the Storage Account')
 param location string
 
-@description('Name of the Storage Account (3-24 lowercase letters/numbers).')
+@description('Name of the Storage Account (3-24 lowercase letters/numbers)')
 @minLength(3)
 @maxLength(24)
 param name string
 
-resource storage 'Microsoft.Storage/storageAccounts@2024-01-01' = {
-  name: name
+@description('Tags to apply to the resource')
+param tags object
+
+resource storage 'Microsoft.Storage/storageAccounts@2023-05-01' = {
   location: location
+  name: name
   sku: {
     name: 'Standard_LRS'
   }
@@ -18,6 +21,7 @@ resource storage 'Microsoft.Storage/storageAccounts@2024-01-01' = {
     minimumTlsVersion: 'TLS1_2'
     allowBlobPublicAccess: false
   }
+  tags: tags
 }
 
 @description('Storage account resource id')
