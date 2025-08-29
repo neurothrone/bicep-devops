@@ -9,18 +9,18 @@ env:
   BICEP_PARAMETERS_FILE: "@./infra/deploy/main.parameters.json"
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Infrastructure Code
         uses: actions/checkout@v3
 
-      - name: Setup Bicep
+      - name: Lint Bicep code
         run: "az bicep build --file ${{ env.BICEP_TEMPLATE_FILE }}"
 
   validate:
     runs-on: ubuntu-latest
-    needs: build
+    needs: lint
     steps:
       - name: Checkout Infrastructure Code
         uses: actions/checkout@v3
@@ -39,7 +39,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: [ build, validate ]
+    needs: [ lint, validate ]
     steps:
       - name: Checkout Infrastructure Code
         uses: actions/checkout@v3
