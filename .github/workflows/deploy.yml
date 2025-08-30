@@ -1,5 +1,7 @@
 name: "Deploy Azure IaC with Bicep"
 
+concurrency: deploy
+
 on: [ workflow_dispatch ]
 
 env:

@@ -1,5 +1,7 @@
 name: "Lint/Validate/Deploy Azure IaC with Bicep v1"
 
+concurrency: lint-validate-deploy
+
 on: [ workflow_dispatch ]
 
 env:
