@@ -1,0 +1,21 @@
+trigger: none
+
+pool:
+  vmImage:
+
+jobs:
+  - job:
+    displayName: "Deploy Azure IaC with Bicep"
+    steps:
+      - task: AzureResourceManagerTemplateDeployment@3
+        displayName: "Deploy Bicep Template to Azure"
+        inputs:
+          deploymentScope: "Subscription"
+          azureResourceManagerConnection: "BicepDevOpsConnection"
+          subscriptionId: "$(AZURE_SUBSCRIPTION_ID)"
+          action: "Create Or Update Resource Group"
+          location: "$(AZURE_REGION)"
+          templateLocation: "Linked artifact"
+          csmFile: "$(System.DefaultWorkingDirectory)/infra/deploy/main.bicep"
+          csmParametersFile: "$(System.DefaultWorkingDirectory)/infra/deploy/main.parameters.json"
+          deploymentMode: "Incremental"
