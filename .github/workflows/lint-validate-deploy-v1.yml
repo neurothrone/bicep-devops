@@ -6,7 +6,6 @@ on: [ workflow_dispatch ]
 
 env:
   AZURE_REGION: ${{ vars.AZURE_REGION }}
-  AZURE_RESOURCE_GROUP_NAME: ${{ vars.AZURE_RESOURCE_GROUP_NAME }}
   BICEP_TEMPLATE_FILE: "./infra/deploy/main.bicep"
   BICEP_PARAMETERS_FILE: "./infra/deploy/main.parameters.json"
 
