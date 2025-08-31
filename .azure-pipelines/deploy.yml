@@ -12,7 +12,6 @@ jobs:
         inputs:
           deploymentScope: "Subscription"
           azureResourceManagerConnection: "BicepDevOpsConnection"
-#          subscriptionId: "$(AZURE_SUBSCRIPTION_ID)"
           action: "Create Or Update Resource Group"
           location: "$(AZURE_REGION)"
           templateLocation: "Linked artifact"
