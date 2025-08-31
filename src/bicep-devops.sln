@@ -4,8 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BicepDevOps.WebApi", "Bicep
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{04EEE9A9-E347-4771-A281-EF17427E4A69}"
 	ProjectSection(SolutionItems) = preProject
-		.gitignore = .gitignore
-		README.md = README.md
+		.gitignore = ../.gitignore
+		README.md = ../README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{1534D8E2-C967-4666-A5BB-DE5CCD2F324D}"
