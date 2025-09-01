@@ -1,0 +1,15 @@
+name: Trigger Azure DevOps Pipeline
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Azure Pipelines Action
+        uses: Azure/pipelines@v1
+        with:
+          azure-devops-project-url: "https://dev.azure.com/Cloud24-Sandbox/BicepDevOps"
+          azure-pipeline-name: "github-actions-trigger-pipeline"
+          azure-devops-token: ${{ secrets.AZURE_DEVOPS_TOKEN }}
