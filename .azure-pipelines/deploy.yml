@@ -17,5 +17,7 @@ jobs:
           templateLocation: "Linked artifact"
           csmFile: "$(System.DefaultWorkingDirectory)/infra/deploy/main.bicep"
           csmParametersFile: "$(System.DefaultWorkingDirectory)/infra/deploy/main.parameters.json"
+          overrideParameters: >
+            -environment "$(ENVIRONMENT)"
           deploymentName: "$(Build.BuildId)"
           deploymentMode: "Incremental"
