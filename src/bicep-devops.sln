@@ -8,9 +8,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1534D8E2-C967-4666-A5BB-DE5CCD2F324D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backend", "backend", "{F5ECAEF0-284C-4724-BCE5-90A9C7726710}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "frontend", "frontend", "{0027BE8B-DA3F-4DFC-8CFE-8AC942CF1E30}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backend", "backend", "{F5ECAEF0-284C-4724-BCE5-90A9C7726710}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BicepDevOps.WebApi", "backend\BicepDevOps.WebApi\BicepDevOps.WebApi.csproj", "{094CA991-CA17-45F3-A16B-D99A32F9E362}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BicepDevOps.WebApp", "frontend\BicepDevOps.WebApp\BicepDevOps.WebApp.csproj", "{D88346D4-80E9-4281-B417-7CD601237BBC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,9 +22,19 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{094CA991-CA17-45F3-A16B-D99A32F9E362}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{094CA991-CA17-45F3-A16B-D99A32F9E362}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{094CA991-CA17-45F3-A16B-D99A32F9E362}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{094CA991-CA17-45F3-A16B-D99A32F9E362}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D88346D4-80E9-4281-B417-7CD601237BBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D88346D4-80E9-4281-B417-7CD601237BBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D88346D4-80E9-4281-B417-7CD601237BBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D88346D4-80E9-4281-B417-7CD601237BBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0027BE8B-DA3F-4DFC-8CFE-8AC942CF1E30} = {1534D8E2-C967-4666-A5BB-DE5CCD2F324D}
 		{F5ECAEF0-284C-4724-BCE5-90A9C7726710} = {1534D8E2-C967-4666-A5BB-DE5CCD2F324D}
+		{094CA991-CA17-45F3-A16B-D99A32F9E362} = {F5ECAEF0-284C-4724-BCE5-90A9C7726710}
+		{D88346D4-80E9-4281-B417-7CD601237BBC} = {0027BE8B-DA3F-4DFC-8CFE-8AC942CF1E30}
 	EndGlobalSection
 EndGlobal
