@@ -1,0 +1,17 @@
+name: Hello
+
+on:
+  workflow_call:
+    inputs:
+      name:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello ${{ inputs.name }}"
