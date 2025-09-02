@@ -8,12 +8,6 @@
     "location": {
       "value": "swedencentral"
     },
-    "solutionName": {
-      "value": "bicep-devops"
-    },
-    "useUniqueResourceGroupName": {
-      "value": false
-    },
     "resourceTags": {
       "value": {
         "Owner": "neurothrone",
