@@ -1,6 +1,6 @@
 trigger: none
 
-name: Deploy Resources to Azure with Bicep
+name: Deploy Resources to Azure with Bicep using Subscription scope
 
 parameters:
   - name: azureServiceConnection
@@ -9,7 +9,6 @@ parameters:
 
 variables:
   vmImageName: "ubuntu-latest"
-  resourceGroupName: "rg-$(ENVIRONMENT)"
   location: "$(AZURE_REGION)"
   templateFile: "$(System.DefaultWorkingDirectory)/infra/deploy/main.bicep"
   csmParametersFile: "$(System.DefaultWorkingDirectory)/infra/deploy/main.parameters.json"
