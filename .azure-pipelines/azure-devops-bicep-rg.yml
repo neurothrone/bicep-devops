@@ -9,7 +9,7 @@ parameters:
 
 variables:
   vmImageName: "ubuntu-latest"
-  resourceGroupName: "rg-$(ENVIRONMENT)"
+  resourceGroupName: "rg-bicep-devops-$(ENVIRONMENT)"
   location: "$(AZURE_REGION)"
   templateFile: "$(System.DefaultWorkingDirectory)/infra/deploy/main.bicep"
   csmParametersFile: "$(System.DefaultWorkingDirectory)/infra/deploy/main.parameters.json"
@@ -24,9 +24,10 @@ jobs:
       - task: AzureResourceManagerTemplateDeployment@3
         displayName: "Deploy Bicep Template to Azure"
         inputs:
-          deploymentScope: "Subscription"
+          deploymentScope: "Resource Group"
           connectedServiceName: "${{ parameters.azureServiceConnection }}"
           action: "Create Or Update Resource Group"
+          resourceGroupName: "$(resourceGroupName)"
           location: "$(AZURE_REGION)"
           templateLocation: "Linked artifact"
           csmFile: "$(templateFile)"
