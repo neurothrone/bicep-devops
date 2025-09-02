@@ -10,8 +10,8 @@ parameters:
 variables:
   vmImageName: "ubuntu-latest"
   location: "$(AZURE_REGION)"
-  templateFile: "$(System.DefaultWorkingDirectory)/infra/deploy/main.bicep"
-  csmParametersFile: "$(System.DefaultWorkingDirectory)/infra/deploy/main.parameters.json"
+  templateFile: "$(System.DefaultWorkingDirectory)/infra/deploy-sub-scope/main.bicep"
+  csmParametersFile: "$(System.DefaultWorkingDirectory)/infra/deploy-sub-scope/main.parameters.json"
 
 pool:
   vmImage: "$(vmImageName)"
