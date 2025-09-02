@@ -1,4 +1,4 @@
-name: az-cli.yml
+name: Azure CLI Version Check
 on: [ workflow_dispatch ]
 
 jobs:
