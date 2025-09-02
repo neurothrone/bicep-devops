@@ -1,0 +1,9 @@
+name: az-cli.yml
+on: [ workflow_dispatch ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show Azure CLI version
+        run: az --version
