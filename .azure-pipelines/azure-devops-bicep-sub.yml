@@ -31,6 +31,6 @@ jobs:
           csmFile: "$(templateFile)"
           csmParametersFile: "$(csmParametersFile)"
           overrideParameters: >
-              -environment "$(ENVIRONMENT)"
+            -environment "$(ENVIRONMENT)"
           deploymentName: "$(Build.BuildId)"
           deploymentMode: "Incremental"
