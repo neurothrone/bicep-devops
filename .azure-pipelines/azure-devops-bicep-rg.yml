@@ -11,8 +11,8 @@ variables:
   vmImageName: "ubuntu-latest"
   resourceGroupName: "rg-bicep-devops-$(ENVIRONMENT)"
   location: "$(AZURE_REGION)"
-  templateFile: "$(System.DefaultWorkingDirectory)/infra/deploy/main.bicep"
-  csmParametersFile: "$(System.DefaultWorkingDirectory)/infra/deploy/main.parameters.json"
+  templateFile: "$(System.DefaultWorkingDirectory)/infra/deploy-rg-scope/main.bicep"
+  csmParametersFile: "$(System.DefaultWorkingDirectory)/infra/deploy-rg-scope/main.parameters.json"
 
 pool:
   vmImage: "$(vmImageName)"
