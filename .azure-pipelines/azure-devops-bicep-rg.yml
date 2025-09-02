@@ -1,0 +1,37 @@
+trigger: none
+
+name: Deploy Resources to Azure with Bicep using Resource Group scope
+
+parameters:
+  - name: azureServiceConnection
+    type: string
+    default: "BicepDevOpsConnection"
+
+variables:
+  vmImageName: "ubuntu-latest"
+  resourceGroupName: "rg-$(ENVIRONMENT)"
+  location: "$(AZURE_REGION)"
+  templateFile: "$(System.DefaultWorkingDirectory)/infra/deploy/main.bicep"
+  csmParametersFile: "$(System.DefaultWorkingDirectory)/infra/deploy/main.parameters.json"
+
+pool:
+  vmImage: "$(vmImageName)"
+
+jobs:
+  - job:
+    displayName: "Deploy Azure IaC with Bicep"
+    steps:
+      - task: AzureResourceManagerTemplateDeployment@3
+        displayName: "Deploy Bicep Template to Azure"
+        inputs:
+          deploymentScope: "Subscription"
+          connectedServiceName: "${{ parameters.azureServiceConnection }}"
+          action: "Create Or Update Resource Group"
+          location: "$(AZURE_REGION)"
+          templateLocation: "Linked artifact"
+          csmFile: "$(templateFile)"
+          csmParametersFile: "$(csmParametersFile)"
+          overrideParameters: >
+              -environment "$(ENVIRONMENT)"
+          deploymentName: "$(Build.BuildId)"
+          deploymentMode: "Incremental"
