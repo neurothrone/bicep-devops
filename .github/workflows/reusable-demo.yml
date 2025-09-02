@@ -5,7 +5,7 @@ on:
 
 jobs:
   call-hello:
-    uses: ./.github/workflows/reusable/hello.yml
+    uses: ./.github/workflows/hello.yml
     with:
       name: "World"
     secrets:
