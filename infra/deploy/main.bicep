@@ -35,6 +35,10 @@ var storageAccountBaseName = 'stg${uniqueString(subscription().id, resourceGroup
 var storageAccountFullName = '${storageAccountBaseName}${environment}'
 var storageModuleFullName = '${storageAccountBaseName}-${deploymentTimestamp}-${environment}'
 
+var tags = union(resourceTags, {
+  Environment: environment
+})
+
 // !: --- Modules ---
 @description('Module to create the Resource Group')
 module resourceGroupModule 'modules/resource-group.bicep' = {
@@ -42,7 +46,7 @@ module resourceGroupModule 'modules/resource-group.bicep' = {
   params: {
     location: location
     resourceGroupName: resourceGroupFullName
-    tags: resourceTags
+    tags: tags
   }
 }
 
@@ -52,7 +56,7 @@ module storageModule 'modules/storage.bicep' = {
   params: {
     location: location
     storageAccountName: storageAccountFullName
-    tags: resourceTags
+    tags: tags
   }
   dependsOn: [resourceGroupModule]
 }
