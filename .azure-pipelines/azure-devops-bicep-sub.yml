@@ -4,21 +4,28 @@ name: Deploy Resources to Azure with Bicep using Subscription scope
 
 parameters:
   - name: vmImageName
+    displayName: "VM Image"
     type: string
     default: "ubuntu-latest"
+    values:
+      - macOS-latest
+      - ubuntu-latest
+      - windows-latest
 
   - name: serviceConnectionName
+    displayName: "Service Connection Name"
     type: string
     default: "BicepDevOpsConnection"
 
   - name: environment
+    displayName: "Environment"
     type: string
     default: "dev"
 
   - name: deploymentLocation
+    displayName: "Deployment Location"
     type: string
     default: "swedencentral"
-
 
 variables:
   vmImageName: ${{ parameters.vmImageName }}
