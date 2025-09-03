@@ -3,19 +3,38 @@ trigger: none
 name: Deploy Resources to Azure with Bicep using Resource Group scope
 
 parameters:
-  - name: azureServiceConnection
+  - name: vmImageName
+    type: string
+    default: "ubuntu-latest"
+
+  - name: serviceConnectionName
     type: string
     default: "BicepDevOpsConnection"
 
+  - name: environment
+    type: string
+    default: "dev"
+
+  - name: deploymentLocation
+    type: string
+    default: "swedencentral"
+
+  - name: resourceGroupName
+    type: string
+    default: "rg-bicep-devops"
+
+  - name: useEnvironmentSuffix
+    type: boolean
+    default: true
+
 variables:
-  vmImageName: "ubuntu-latest"
-  resourceGroupName: "rg-bicep-devops-$(ENVIRONMENT)"
-  location: "$(AZURE_REGION)"
-  templateFile: "$(System.DefaultWorkingDirectory)/infra/deploy-rg-scope/main.bicep"
-  csmParametersFile: "$(System.DefaultWorkingDirectory)/infra/deploy-rg-scope/main.parameters.json"
+  vmImageName: ${{ parameters.vmImageName }}
+  resourceGroupName: ${{ parameters.resourceGroupName }}${{ if eq(parameters.useEnvironmentSuffix, true) }}-${{ parameters.environment }}
+  templateFile: $(System.DefaultWorkingDirectory)/infra/deploy-rg-scope/main.bicep
+  csmParametersFile: $(System.DefaultWorkingDirectory)/infra/deploy-rg-scope/main.parameters.json
 
 pool:
-  vmImage: "$(vmImageName)"
+  vmImage: $(vmImageName)
 
 jobs:
   - job:
@@ -25,14 +44,14 @@ jobs:
         displayName: "Deploy Bicep Template to Azure"
         inputs:
           deploymentScope: "Resource Group"
-          connectedServiceName: "${{ parameters.azureServiceConnection }}"
+          connectedServiceName: ${{ parameters.serviceConnectionName }}
           action: "Create Or Update Resource Group"
-          resourceGroupName: "$(resourceGroupName)"
-          location: "$(AZURE_REGION)"
+          resourceGroupName: $(resourceGroupName)
+          location: ${{ parameters.deploymentLocation }}
           templateLocation: "Linked artifact"
-          csmFile: "$(templateFile)"
-          csmParametersFile: "$(csmParametersFile)"
+          csmFile: $(templateFile)
+          csmParametersFile: $(csmParametersFile)
           overrideParameters: >
-            -environment "$(ENVIRONMENT)"
-          deploymentName: "$(Build.BuildId)"
+            -environment ${{ parameters.environment }}
+          deploymentName: $(Build.BuildId)
           deploymentMode: "Incremental"
