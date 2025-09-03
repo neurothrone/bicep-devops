@@ -8,9 +8,9 @@ parameters:
     type: string
     default: "ubuntu-latest"
     values:
-      - macOS-latest
       - ubuntu-latest
       - windows-latest
+      - macOS-latest
 
   - name: serviceConnectionName
     displayName: "Service Connection Name"
