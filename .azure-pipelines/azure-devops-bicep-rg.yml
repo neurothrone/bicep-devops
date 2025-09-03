@@ -4,32 +4,42 @@ name: Deploy Resources to Azure with Bicep using Resource Group scope
 
 parameters:
   - name: vmImageName
+    displayName: "VM Image"
     type: string
     default: "ubuntu-latest"
+    values:
+      - macOS-latest
+      - ubuntu-latest
+      - windows-latest
 
   - name: serviceConnectionName
+    displayName: "Service Connection Name"
     type: string
     default: "BicepDevOpsConnection"
 
   - name: environment
+    displayName: "Environment"
     type: string
     default: "dev"
 
   - name: deploymentLocation
+    displayName: "Deployment Location"
     type: string
     default: "swedencentral"
 
   - name: resourceGroupName
+    displayName: "Resource Group Name"
     type: string
     default: "rg-bicep-devops"
 
   - name: useEnvironmentSuffix
+    displayName: "Use Environment Suffix (e.g. rg-bicep-devops-dev)"
     type: boolean
     default: true
 
 variables:
   vmImageName: ${{ parameters.vmImageName }}
-  resourceGroupName: ${{ parameters.resourceGroupName }}${{ if eq(parameters.useEnvironmentSuffix, true) }}-${{ parameters.environment }}
+  resourceGroupName: ${{ if eq(parameters.useEnvironmentSuffix, true) }}'${{ parameters.resourceGroupName }}-${{ parameters.environment }}'${{ else }}'${{ parameters.resourceGroupName }}'
   templateFile: $(System.DefaultWorkingDirectory)/infra/deploy-rg-scope/main.bicep
   csmParametersFile: $(System.DefaultWorkingDirectory)/infra/deploy-rg-scope/main.parameters.json
 
