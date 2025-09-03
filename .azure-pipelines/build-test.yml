@@ -1,0 +1,29 @@
+trigger:
+  branches:
+    include:
+      - main
+      - dev
+      - feature/*
+  paths:
+    exclude:
+      - .azure-pipelines/*
+      - .github/*
+      - docs
+    include:
+      - src/*
+      - infra/*
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - task: UseDotNet@2
+    inputs:
+      packageType: 'sdk'
+      version: '8.x'
+
+  - script: dotnet build
+    displayName: 'Build Project'
+
+  - script: dotnet test
+    displayName: 'Run Unit Tests'
