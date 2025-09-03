@@ -21,6 +21,10 @@ parameters:
     displayName: "Environment"
     type: string
     default: "dev"
+    values:
+      - dev
+      - test
+      - prod
 
   - name: deploymentLocation
     displayName: "Deployment Location"
