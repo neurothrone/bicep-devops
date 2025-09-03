@@ -21,6 +21,10 @@ parameters:
     displayName: "Environment"
     type: string
     default: "dev"
+    values:
+      - dev
+      - test
+      - prod
 
   - name: deploymentLocation
     displayName: "Deployment Location"
@@ -39,7 +43,8 @@ parameters:
 
 variables:
   vmImageName: ${{ parameters.vmImageName }}
-  resourceGroupName: ${{ if eq(parameters.useEnvironmentSuffix, true) }}'${{ parameters.resourceGroupName }}-${{ parameters.environment }}'${{ else }}'${{ parameters.resourceGroupName }}'
+  environment: ${{ parameters.environment }}
+  resourceGroupName: ${{ parameters.resourceGroupName }}
   templateFile: $(System.DefaultWorkingDirectory)/infra/deploy-rg-scope/main.bicep
   csmParametersFile: $(System.DefaultWorkingDirectory)/infra/deploy-rg-scope/main.parameters.json
 
@@ -56,7 +61,7 @@ jobs:
           deploymentScope: "Resource Group"
           connectedServiceName: ${{ parameters.serviceConnectionName }}
           action: "Create Or Update Resource Group"
-          resourceGroupName: $(resourceGroupName)
+          resourceGroupName: ${{ iif(parameters.useEnvironmentSuffix, format('{0}-{1}', variables.resourceGroupName, variables.environment), variables.resourceGroupName) }}
           location: ${{ parameters.deploymentLocation }}
           templateLocation: "Linked artifact"
           csmFile: $(templateFile)
