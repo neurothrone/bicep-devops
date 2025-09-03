@@ -17,12 +17,11 @@ parameters:
     default: "ubuntu-latest"
 
 variables:
-  serviceConnectionName: $(parameters.serviceConnectionName)
   templateFile: "$(System.DefaultWorkingDirectory)/infra/deploy-sub-scope/main.bicep"
   csmParametersFile: "$(System.DefaultWorkingDirectory)/infra/deploy-sub-scope/main.parameters.json"
 
 pool:
-  vmImage: $(parameters.vmImageName)
+  vmImage: ${{ parameters.vmImageName }}
 
 jobs:
   - job:
@@ -32,13 +31,13 @@ jobs:
         displayName: "Deploy Bicep Template to Azure"
         inputs:
           deploymentScope: "Subscription"
-          connectedServiceName: $(serviceConnectionName)
+          connectedServiceName: ${{ parameters.serviceConnectionName }}
           action: "Create Or Update Resource Group"
-          location: $(parameters.deploymentLocation)
+          location: ${{ parameters.deploymentLocation }}
           templateLocation: "Linked artifact"
           csmFile: $(templateFile)
           csmParametersFile: $(csmParametersFile)
           overrideParameters: >
-            -environment $(parameters.environment)
+            -environment ${{ parameters.environment }}
           deploymentName: $(Build.BuildId)
           deploymentMode: "Incremental"
