@@ -55,5 +55,5 @@ jobs:
           csmParametersFile: $(csmParametersFile)
           overrideParameters: >
             -environment ${{ parameters.environment }}
-          deploymentName: $(Build.BuildId)
+          deploymentName: $(Build.BuildNumber)
           deploymentMode: "Incremental"

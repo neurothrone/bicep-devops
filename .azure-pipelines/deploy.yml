@@ -19,5 +19,5 @@ jobs:
           csmParametersFile: "$(System.DefaultWorkingDirectory)/infra/deploy/main.parameters.json"
           overrideParameters: >
             -environment "$(ENVIRONMENT)"
-          deploymentName: "$(Build.BuildId)"
+          deploymentName: "$(Build.BuildNumber)"
           deploymentMode: "Incremental"
