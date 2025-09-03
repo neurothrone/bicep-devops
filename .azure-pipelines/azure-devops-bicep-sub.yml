@@ -3,18 +3,25 @@ trigger: none
 name: Deploy Resources to Azure with Bicep using Subscription scope
 
 parameters:
-  - name: azureServiceConnection
+  - name: serviceConnectionName
     type: string
     default: "BicepDevOpsConnection"
+  - name: environment
+    type: string
+    default: "dev"
+  - name: deploymentLocation
+    type: string
+    default: "swedencentral"
+  - name: vmImageName
+    type: string
+    default: "ubuntu-latest"
 
 variables:
-  vmImageName: "ubuntu-latest"
-  location: "$(AZURE_REGION)"
   templateFile: "$(System.DefaultWorkingDirectory)/infra/deploy-sub-scope/main.bicep"
   csmParametersFile: "$(System.DefaultWorkingDirectory)/infra/deploy-sub-scope/main.parameters.json"
 
 pool:
-  vmImage: "$(vmImageName)"
+  vmImage: $(parameters.vmImageName)
 
 jobs:
   - job:
@@ -24,13 +31,13 @@ jobs:
         displayName: "Deploy Bicep Template to Azure"
         inputs:
           deploymentScope: "Subscription"
-          connectedServiceName: "${{ parameters.azureServiceConnection }}"
+          connectedServiceName: $(parameters.serviceConnectionName)
           action: "Create Or Update Resource Group"
-          location: "$(AZURE_REGION)"
+          location: $(parameters.deploymentLocation)
           templateLocation: "Linked artifact"
-          csmFile: "$(templateFile)"
-          csmParametersFile: "$(csmParametersFile)"
+          csmFile: $(templateFile)
+          csmParametersFile: $(csmParametersFile)
           overrideParameters: >
-            -environment "$(ENVIRONMENT)"
-          deploymentName: "$(Build.BuildId)"
+            -environment $(parameters.environment)
+          deploymentName: $(Build.BuildId)
           deploymentMode: "Incremental"
