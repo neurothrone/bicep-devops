@@ -3,6 +3,10 @@ trigger: none
 name: Deploy Resources to Azure with Bicep using Subscription scope
 
 parameters:
+  - name: vmImageName
+    type: string
+    default: "ubuntu-latest"
+
   - name: serviceConnectionName
     type: string
     default: "BicepDevOpsConnection"
@@ -15,14 +19,11 @@ parameters:
     type: string
     default: "swedencentral"
 
-  - name: vmImageName
-    type: string
-    default: "ubuntu-latest"
 
 variables:
   vmImageName: ${{ parameters.vmImageName }}
-  templateFile: "$(System.DefaultWorkingDirectory)/infra/deploy-sub-scope/main.bicep"
-  csmParametersFile: "$(System.DefaultWorkingDirectory)/infra/deploy-sub-scope/main.parameters.json"
+  templateFile: $(System.DefaultWorkingDirectory)/infra/deploy-sub-scope/main.bicep
+  csmParametersFile: $(System.DefaultWorkingDirectory)/infra/deploy-sub-scope/main.parameters.json
 
 pool:
   vmImage: $(vmImageName)
